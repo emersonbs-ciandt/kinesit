@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 public abstract class RecordProcessor<T> implements IRecordProcessor {
 
@@ -42,6 +41,7 @@ public abstract class RecordProcessor<T> implements IRecordProcessor {
             resultRecords.put(record);
         } catch (InterruptedException ex) {
             logger.error(ex);
+            throw new RuntimeException(ex);
         }
     }
 
