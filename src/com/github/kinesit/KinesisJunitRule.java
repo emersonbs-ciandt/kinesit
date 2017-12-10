@@ -15,6 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 public class KinesisJunitRule<T> extends ExternalResource {
 
+    static {
+        System.setProperty("AWS_CBOR_DISABLE", "true");
+    }
+
     private final static Logger logger = LogManager.getLogger(KinesisJunitRule.class);
 
     private static final String WORKER_ID = UUID.randomUUID().toString();
