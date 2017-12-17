@@ -42,7 +42,7 @@ public class KinesisJunitRule<T> extends ExternalResource {
                                                                                  configProvider.getStreamName(),
                                                                                  credentialsProvider,
                                                                                  WORKER_ID)
-                .withInitialPositionInStream(InitialPositionInStream.LATEST)
+                .withInitialPositionInStream(InitialPositionInStream.TRIM_HORIZON)
                 .withKinesisEndpoint(configProvider.getKinesisEndpoint())
                 .withDynamoDBEndpoint(configProvider.getDynamoDbEndpoint());
 

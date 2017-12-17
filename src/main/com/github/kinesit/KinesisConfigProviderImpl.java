@@ -1,34 +1,38 @@
 package com.github.kinesit;
 
-public class KinesisConfigProvider {
+public class KinesisConfigProviderImpl implements KinesisConfigProvider {
 
     private final String kinesisEndpoint;
     private final String dynamoDbEndpoint;
     private final String appName;
     private final String streamName;
 
-    public KinesisConfigProvider(String kinesisEndpoint,
-                                 String dynamoDbEndpoint,
-                                 String appName,
-                                 String streamName) {
+    public KinesisConfigProviderImpl(String kinesisEndpoint,
+                                     String dynamoDbEndpoint,
+                                     String appName,
+                                     String streamName) {
         this.kinesisEndpoint = kinesisEndpoint;
         this.dynamoDbEndpoint = dynamoDbEndpoint;
         this.appName = appName;
         this.streamName = streamName;
     }
 
+    @Override
     public String getKinesisEndpoint() {
         return kinesisEndpoint;
     }
 
+    @Override
     public String getDynamoDbEndpoint() {
         return dynamoDbEndpoint;
     }
 
+    @Override
     public String getAppName() {
         return appName;
     }
 
+    @Override
     public String getStreamName() {
         return streamName;
     }
@@ -68,10 +72,10 @@ public class KinesisConfigProvider {
         }
 
         public KinesisConfigProvider build() {
-            return new KinesisConfigProvider(kinesisEndpoint,
-                    dynamoDbEndpoint,
-                    appName,
-                    streamName);
+            return new KinesisConfigProviderImpl(kinesisEndpoint,
+                                                 dynamoDbEndpoint,
+                                                 appName,
+                                                 streamName);
         }
     }
 }
