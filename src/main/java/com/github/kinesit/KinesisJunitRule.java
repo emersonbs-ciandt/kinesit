@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import org.junit.rules.ExternalResource;
 
 import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class KinesisJunitRule<T> extends ExternalResource {
@@ -28,6 +30,7 @@ public class KinesisJunitRule<T> extends ExternalResource {
     private final KinesisConfigProvider configProvider;
     private final RecordProcessor<T> recordProcessor;
     private Worker worker;
+    private final Executor executor = Executors.newSingleThreadExecutor();
 
     public KinesisJunitRule(KinesisConfigProvider configProvider,
                             RecordProcessor<T> recordProcessor) {
@@ -50,7 +53,7 @@ public class KinesisJunitRule<T> extends ExternalResource {
                 .recordProcessorFactory(() -> recordProcessor).config(config)
                 .metricsFactory(NULL_METRICS_FACTORY).build();
 
-        worker.run();
+        executor.execute(worker);
     }
 
     public T getRecord() {
