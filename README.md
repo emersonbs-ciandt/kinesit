@@ -6,8 +6,29 @@ a simple String record processor is also included in the repository,
 I also tried to make it easy to create different processors, 
 extend RecordProcessor and override the single method there.
 
-To run a docker container with kinesalite and dynalite:
+
+## How to use it
+Run a docker container with kinesalite and dynalite:
 
 **docker run -e STREAM_NAME='test-stream' shadi/kinesis-junit-rule**
 
 This will create a container with the stream 'test-stream' ready to receive and send records
+
+add this dependency to pom.xml
+
+     <dependency>
+        <groupId>com.github.slimish</groupId>
+        <artifactId>kinesis-junit-rule</artifactId>
+        <version>1.0.0</version>
+     </dependency>
+        
+After that you can use the rule in the test class
+
+    @Rule
+    public KinesisJunitRule<String> kinesisRule = new KinesisJunitRule<String>(new KinesisConfigProviderImpl(),
+                                                                               new StringRecordProcessor()); 
+                                                                               
+
+and then inside the test:
+
+    String record = kinesisRule.waitForRecord(WAIT_TIME_MILLI);         
