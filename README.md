@@ -8,9 +8,11 @@ extend RecordProcessor and override the single method there.
 
 
 ## How to use it
-Run a docker container with kinesalite and dynalite:
+Go to docker directory
+**cd docker**
 
-**docker run -e STREAM_NAME='test-stream' shadi/kinesis-junit-rule**
+Run a docker-compose with kinesalite and dynalite:
+**docker-compose up**
 
 This will create a container with the stream 'test-stream' ready to receive and send records
 
